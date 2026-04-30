@@ -1,0 +1,55 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: anadea
+
+images:
+  - name: anadea-user
+    newName: ghcr.io/protodiv/anadea-user
+    newTag: latest
+  - name: anadea-auth
+    newName: ghcr.io/protodiv/anadea-auth
+    newTag: latest
+  - name: anadea-gateway
+    newName: ghcr.io/protodiv/anadea-gateway
+    newTag: latest
+  - name: anadea-frontend
+    newName: ghcr.io/protodiv/anadea-frontend
+    newTag: latest
+
+resources:
+  - namespace.yaml
+  - ghcr-secret.yaml
+
+  # Global config
+  - global-configmap.yaml
+
+  # Auth Service resources
+  - auth/deployment.yaml
+  - auth/service.yaml
+  - auth/auth-config.yaml
+  - auth/secret/auth-secret.yaml
+  # Auth DB Resources
+  - auth/db/statefulset.yaml
+  - auth/db/service.yaml
+  - auth/db/auth-postgres-volume.yaml
+  - auth/db/auth-postgres-secret.yaml
+
+  # User Service resources
+  - user/deployment.yaml
+  - user/service.yaml
+  # User DB Resources
+  - user/db/statefulset.yaml
+  - user/db/service.yaml
+  - user/db/user-postgres-volume.yaml
+  - user/db/user-postgres-secret.yaml
+
+  # API Gateway resources
+  - gateway/deployment.yaml
+  - gateway/service.yaml
+  - gateway/ingress.yaml
+  - gateway/ingress-service.yaml
+  - gateway/gateway-config.yaml
+
+  # Frontend resources
+  - frontend/deployment.yaml
+  - frontend/service.yaml

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+  namespace: anadea
+data:
+  AUTH_SERVICE_URL: http://auth:8081
+  USER_SERVICE_URL: http://user:8082

@@ -1,0 +1,8 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+jwt:
+  access-token-expiry: 60000 # 1 minute
+  refresh-token-expiry: 12000 # 2 minute

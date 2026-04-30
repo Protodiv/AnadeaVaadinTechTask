@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  namespace: anadea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: auth
+          image: anadea-auth
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "512Mi"
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:ReservedCodeCacheSize=64M -XX:MaxMetaspaceSize=128M -Xss512k -XX:MaxDirectMemorySize=10M"
+            - name: BPL_JVM_THREAD_COUNT
+              value: "100"
+            - name: USER_SERVICE_URL
+              value: http://user:8082
+          envFrom:
+            - configMapRef:
+                name: auth-config
+            - configMapRef:
+                name: global-configmap
+            - secretRef:
+                name: auth-postgres-db-secret
+          volumeMounts:
+            - name: auth-keys-volume
+              mountPath: "/etc/keys"
+              readOnly: true
+      volumes:
+        - name: auth-keys-volume
+          secret:
+            secretName: auth-secret

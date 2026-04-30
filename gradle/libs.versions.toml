@@ -1,0 +1,61 @@
+[versions]
+kotlin = "2.2.0"
+java = "21"
+
+spring-boot = "4.0.6"
+spring-dependency-management = "1.1.7"
+spring-cloud = "2025.1.1"
+
+fasterxml-jackson = "2.21.0"
+
+serialization-json-jvm = "1.9.0"
+
+flyway = "12.4.0"
+
+jjwt = "0.12.6"
+nimbus-jose-jwt = "10.9"
+
+validation = "3.0.0"
+
+[libraries]
+spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "spring-cloud" }
+
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+
+sbs-webmvc = { module = "org.springframework.boot:spring-boot-starter-web" }
+sbs-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+sbs-oauth2 = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+sbs-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+sbs-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+sbs-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "validation" }
+scs-gateway-server-webflux = { module = "org.springframework.cloud:spring-cloud-starter-gateway-server-webflux" }
+
+org-postgresql = { module = "org.postgresql:postgresql"}
+
+fasterxml-jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "fasterxml-jackson" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json-jvm" }
+
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
+
+jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
+jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
+jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version.ref = "nimbus-jose-jwt" }
+
+[bundles]
+jjwt = [
+    "jjwt-api",
+    "jjwt-impl",
+    "jjwt-jackson"
+]
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+docker-conventions = { id = "docker-conventions" }

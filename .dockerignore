@@ -1,0 +1,21 @@
+# Ignore build outputs
+**/build/
+**/.gradle/
+**/out/
+**/node_modules/
+**/dist/
+**/target/
+
+# Ignore IDE files
+.idea/
+*.iml
+.vscode/
+
+# Ignore VCS
+.git
+.gitignore
+
+# Keep wrapper scripts
+!gradlew
+!gradlew.bat
+!gradle/

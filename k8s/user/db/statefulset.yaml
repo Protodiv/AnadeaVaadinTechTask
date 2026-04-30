@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: "user-postgres-db"
+  namespace: anadea
+spec:
+  serviceName: "user-postgres-db"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-postgres-db
+  template:
+    metadata:
+      labels:
+        app: user-postgres-db
+    spec:
+      containers:
+        - name: user-postgres-db
+          image: 'postgres:14'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              name: postgres
+          envFrom:
+            - secretRef:
+                name: user-postgres-db-secret
+          volumeMounts:
+            - mountPath: /data/db
+              name: user-postgres-db-data
+      volumes:
+        - name: user-postgres-db-data
+          persistentVolumeClaim:
+            claimName: user-postgres-db-volume-claim
+---

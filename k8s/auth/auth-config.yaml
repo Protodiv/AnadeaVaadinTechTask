@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+  namespace: anadea
+data:
+  JWT_PRIVATE_KEY_PATH: "/etc/keys/private.pem"
+  JWT_PUBLIC_KEY_PATH: "/etc/keys/public.pem"
+  JWT_ACCESS_TOKEN_EXPIRY: "90000"
+  JWT_REFRESH_TOKEN_EXPIRY: "180000"

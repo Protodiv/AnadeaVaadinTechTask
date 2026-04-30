@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: anadea
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: gateway
+          image: anadea-gateway
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "512Mi"
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:ReservedCodeCacheSize=64M -XX:MaxMetaspaceSize=64M -Xss512k -XX:MaxDirectMemorySize=10M"
+            - name: BPL_JVM_THREAD_COUNT
+              value: "100"
+          envFrom:
+            - configMapRef:
+                name: gateway-config
+            - configMapRef:
+                name: global-configmap

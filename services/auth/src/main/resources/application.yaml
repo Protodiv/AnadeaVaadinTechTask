@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: auth
+  
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+services:
+  user-service:
+    url: ${USER_SERVICE_URL}
+
+jwt:
+  private-key-path: ${JWT_PRIVATE_KEY_PATH}
+  public-key-path: ${JWT_PUBLIC_KEY_PATH}
+  access-token-expiry: ${JWT_ACCESS_TOKEN_EXPIRY:90000}
+  refresh-token-expiry: ${JWT_REFRESH_TOKEN_EXPIRY:180000}
+
+server:
+  port: 8081
