@@ -27,7 +27,7 @@ import ua.anadea.data.token.TokenRepositoryImp
 val networkModule = module {
 
     single<String>(named("baseUrl")) { 
-        System.getenv("APP_BASE_URL") ?: "http://localhost"
+        System.getenv("APP_BASE_URL") ?: "http://anadea.ua"
     }
 
     single<Json>{

@@ -37,6 +37,24 @@ kubectl get pods -n anadea
 ```
 Wait until all pods are in the `Running` state.
 
+### 🌐 Accessing the Application
+The application is configured to be accessible at `http://anadea.ua`. To access it from your host machine, you must configure your local `hosts` file to resolve this domain to the IP of your Ingress Controller (usually `127.0.0.1` for local Kubernetes setups).
+
+#### **Windows (Run Notepad as Administrator)**
+1. Open `C:\Windows\System32\drivers\etc\hosts`.
+2. Add the following line at the end:
+   `127.0.0.1 anadea.ua`
+3. Save the file.
+
+#### **Linux / macOS (Use sudo)**
+1. Open the terminal and run: `sudo nano /etc/hosts`.
+2. Add the following line at the end:
+   `127.0.0.1 anadea.ua`
+3. Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
+
+Once the host entry is added, you can access the application in your browser at:
+`http://anadea.ua`
+
 ## 🔐 Authentication & Roles
 The application enforces role-based behavior:
 *   **User Role:** Read-only access to the user list. Can search and sort.
